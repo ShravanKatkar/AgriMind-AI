@@ -18,17 +18,18 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com)
+[![Groq AI](https://img.shields.io/badge/Groq_AI-Ultra--Fast_LPU-F05A28?style=for-the-badge&logo=groq&logoColor=white)](https://groq.com)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com)
 [![Firebase](https://img.shields.io/badge/Firebase-Auth-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com)
 
 <p align="center">
-  <a href="#-overview"><b>📖 Overview</b></a> •
-  <a href="#-core-features--modules"><b>✨ Features</b></a> •
-  <a href="#-supported-languages"><b>🌐 Languages</b></a> •
-  <a href="#-system-architecture"><b>🏛️ Architecture</b></a> •
-  <a href="#-getting-started"><b>⚡ Getting Started</b></a> •
-  <a href="#-api-reference"><b>🔌 API Reference</b></a>
+  <a href="#overview"><b>📖 Overview</b></a> •
+  <a href="#core-features--modules"><b>✨ Features</b></a> •
+  <a href="#supported-languages"><b>🌐 Languages</b></a> •
+  <a href="#system-architecture"><b>🏛️ Architecture</b></a> •
+  <a href="#getting-started"><b>⚡ Getting Started</b></a> •
+  <a href="#environment-configuration"><b>⚙️ Setup</b></a> •
+  <a href="#api-reference"><b>🔌 API Reference</b></a>
 </p>
 
 </div>
@@ -37,40 +38,43 @@
 
 ## 📑 Table of Contents
 
-- [Overview](#-overview)
-- [Supported Languages](#-supported-languages)
-- [System Architecture](#-system-architecture)
-- [Core Features & Modules](#-core-features--modules)
+- [Overview](#overview)
+- [Supported Languages](#supported-languages)
+- [System Architecture](#system-architecture)
+- [Core Features & Modules](#core-features--modules)
   - [1. AI Crop Pathology Diagnosis](#1-ai-crop-pathology-diagnosis)
   - [2. Multilingual Voice Assistant](#2-multilingual-voice-assistant)
   - [3. Precision Farm & Crop Management](#3-precision-farm--crop-management)
   - [4. Market Intelligence & Commodity Pricing](#4-market-intelligence--commodity-pricing)
   - [5. Multilingual PDF Report Generation](#5-multilingual-pdf-report-generation)
   - [6. Administrative & Officer Portal](#6-administrative--officer-portal)
-- [Technology Stack](#-technology-stack)
-- [Data Models & Schema](#-data-models--schema)
-- [API Reference](#-api-reference)
-- [Getting Started](#-getting-started)
+- [Technology Stack](#technology-stack)
+- [Data Models & Schema](#data-models--schema)
+- [API Reference](#api-reference)
+- [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Option A: One-Click Launcher (Windows)](#option-a-one-click-launcher-windows)
   - [Option B: Manual Installation](#option-b-manual-installation)
-- [Environment Configuration](#-environment-configuration)
-- [Available Scripts](#-available-scripts)
-- [Project Directory Structure](#-project-directory-structure)
-- [Troubleshooting & FAQs](#-troubleshooting--faqs)
-- [Deployment Guide](#-deployment-guide)
-- [Contributing](#-contributing)
-- [Author & Maintainer](#-author--maintainer)
-- [License](#-license)
+- [Environment Configuration](#environment-configuration)
+- [Available Scripts](#available-scripts)
+- [Project Directory Structure](#project-directory-structure)
+- [Troubleshooting & FAQs](#troubleshooting--faqs)
+- [Deployment Guide](#deployment-guide)
+- [Contributing](#contributing)
+- [Author & Maintainer](#author--maintainer)
+- [License](#license)
 
 ---
 
 ## 📖 Overview
 
-**AgriMind AI** is an enterprise-grade smart agriculture ecosystem built to eliminate the technological, educational, and linguistic barriers faced by farmers. By combining state-of-the-art multimodal vision models (**OpenAI GPT-4o**), low-latency speech recognition, and native Devanagari script processing, AgriMind AI acts as a 24/7 personal agronomy expert in the farmer's pocket.
+**AgriMind AI** is an enterprise-grade smart agriculture ecosystem built to eliminate the technological, educational, and linguistic barriers faced by farmers. By combining state-of-the-art vision models (**Groq AI / Llama 3.2 Vision & Qwen 3.8**), ultra-fast LPU inference (**30 requests/minute completely FREE**), bidirectional multilingual speech recognition, and native Devanagari script processing, AgriMind AI acts as a 24/7 personal agronomy expert in the farmer's pocket.
+
+> [!TIP]
+> **100% Free Tech Stack**: Every service powering AgriMind AI (Groq AI, MongoDB Atlas, Firebase Auth, Cloudinary, and Open-Meteo) provides a permanent free tier — no credit card or paid subscriptions required!
 
 ### Why AgriMind AI?
-- **Immediate Triage**: Identify crop diseases in seconds from a single smartphone photo before outbreaks spread.
+- **Immediate Triage**: Identify crop diseases in seconds from a single smartphone photo with sub-second Groq inference before outbreaks spread.
 - **Language Inclusivity**: Farmers communicate naturally in their native language (**English**, **हिन्दी**, or **मराठी**) via speech or text.
 - **Actionable Remediation**: Detailed chemical dosages, organic alternatives, cost breakdowns, and prevention protocols instead of generic recommendations.
 - **Economic Empowerment**: Live commodity prices, trend forecasts, and optimal harvest sell windows.
@@ -83,12 +87,12 @@ AgriMind AI is engineered from the ground up for strict regional localization:
 
 | Language | Code | Native Script | Speech-to-Text (STT) | Text-to-Speech (TTS) | PDF Report Export |
 |---|---|---|---|---|---|
-| **English** | `en` | Latin | Web Speech / Valsea | OpenAI TTS / Browser | Standard Helvetica |
-| **Hindi** | `hi` | हिन्दी (Devanagari) | Valsea / Browser | OpenAI TTS (`nova` / Indian nuance) | Noto Sans Devanagari |
-| **Marathi** | `mr` | मराठी (Devanagari) | Valsea / Browser | OpenAI TTS (`nova` / Indian nuance) | Noto Sans Devanagari |
+| **English** | `en` | Latin | Web Speech / Groq Whisper | Browser Native Web Speech | Standard Helvetica |
+| **Hindi** | `hi` | हिन्दी (Devanagari) | Groq Whisper / Browser | Browser Native Web Speech | Noto Sans Devanagari |
+| **Marathi** | `mr` | मराठी (Devanagari) | Groq Whisper / Browser | Browser Native Web Speech | Noto Sans Devanagari |
 
 ### Key Localization Highlights:
-- **Instant Client Dictionaries**: Zero-delay UI switching powered by pre-bundled static translation catalogs ([`mr-ui.ts`](file:///c:/Users/shara/Downloads/AgriMind-AI-main/AgriMind-AI-main/lib/i18n/bundled/mr-ui.ts) & [`hi-ui.ts`](file:///c:/Users/shara/Downloads/AgriMind-AI-main/AgriMind-AI-main/lib/i18n/bundled/hi-ui.ts)).
+- **Instant Client Dictionaries**: Zero-delay UI switching powered by pre-bundled static translation catalogs (`lib/i18n/bundled/mr-ui.ts` & `lib/i18n/bundled/hi-ui.ts`).
 - **Devanagari Script Detection**: Regex-based heuristic parser that instantly differentiates Marathi and Hindi markers from Latin inputs without network overhead.
 - **PDF Glyph Integrity**: Custom Base64 font loader that embeds `NotoSansDevanagari-Regular.ttf` into `jsPDF` virtual filesystem to prevent unreadable box characters.
 
@@ -103,6 +107,7 @@ flowchart TD
         AudioRec["Browser MediaRecorder (Speech Audio)"]
         Camera["Photo Uploader / Camera Interface"]
         LangPicker["Instant i18n Catalog (EN, HI, MR)"]
+        WebSpeechTTS["Browser Web Speech API (Native Speech)"]
     end
 
     subgraph Server["Next.js Server & API Routes"]
@@ -112,16 +117,17 @@ flowchart TD
         PDFGen["jsPDF + Noto Sans Devanagari Engine"]
     end
 
-    subgraph AIServices["External AI Engines"]
-        OpenAIVision["OpenAI GPT-4o (Visual Disease Analysis)"]
-        OpenAITTS["OpenAI TTS (Neural Audio Playback)"]
-        ValseaSTT["Valsea.ai (Multilingual Audio Transcription)"]
+    subgraph AIServices["Groq AI High-Speed LPU Engine"]
+        GroqVision["Groq Vision (Llama 3.2 11B / Qwen 3.8)"]
+        GroqChat["Groq Agronomist (Llama 3.3 70B Versatile)"]
+        GroqWhisper["Groq Whisper (Speech-to-Text)"]
     end
 
     subgraph DataStorage["Persistence & Cloud Services"]
         MongoDB[("MongoDB Atlas Database")]
-        Cloudinary["Cloudinary / Firebase Image Bucket"]
+        Cloudinary["Cloudinary Diagnostic Image Bucket"]
         FirebaseAuth["Firebase Authentication Service"]
+        WeatherAPI["Open-Meteo Free Weather Service"]
     end
 
     UI --> Proxy
@@ -132,12 +138,14 @@ flowchart TD
     AuthMiddleware <--> FirebaseAuth
     Proxy --> LangRouter
 
-    Proxy -->|Image URL + Prompt| OpenAIVision
-    Proxy -->|Audio Buffer| ValseaSTT
-    Proxy -->|Response Text + Voice Preset| OpenAITTS
+    Proxy -->|Image Base64 + Diagnosis Prompt| GroqVision
+    Proxy -->|Audio Buffer| GroqWhisper
+    Proxy -->|Farming Prompt + Context| GroqChat
+    Proxy --> WebSpeechTTS
 
     Proxy <-->|CRUD Operations| MongoDB
-    Camera -->|Direct Upload| Cloudinary
+    Camera -->|Direct Image Upload| Cloudinary
+    Proxy <-->|Weather Data| WeatherAPI
     Proxy --> PDFGen
 ```
 
@@ -190,21 +198,23 @@ flowchart TD
 
 ## 🛠️ Technology Stack
 
-| Category | Technology | Description |
-|---|---|---|
-| **Framework** | Next.js 16.2.6 | Full-stack React framework (App Router, Webpack configuration) |
-| **Language** | TypeScript 5.7 | Strict type safety across client, server, and data models |
-| **Styling** | Tailwind CSS v4 | Cutting-edge utility styling with customized agricultural theme |
-| **UI Components** | Radix UI Primitives | Accessible modals, dropdowns, accordions, and popovers |
-| **Animation** | Framer Motion 12 | Smooth page transitions, voice wave pulses, and micro-interactions |
-| **AI Vision** | OpenAI GPT-4o | Multi-modal image inspection and plant disease pathology |
-| **AI Voice / TTS** | OpenAI TTS (`tts-1`) | Natural neural speech synthesis with accent optimization |
-| **Speech STT** | Valsea.ai API | High-accuracy Asian regional language speech-to-text |
-| **Database** | MongoDB Atlas / Mongoose 9 | Scalable document storage with Mongoose ODM |
-| **Auth** | Firebase Auth 12 | Secure authentication with server-side Admin SDK verification |
-| **Image Storage** | Cloudinary / Firebase | Cloud-hosted CDN delivery for crop diagnosis photographs |
-| **PDF Engine** | jsPDF 4.2 | Custom VFS font-embedded vector PDF document generation |
-| **Icons** | Lucide React | Modern, consistent stroke icons |
+| Category | Technology | Description | Free Tier |
+|---|---|---|:---:|
+| **Framework** | Next.js 16.2.6 | Full-stack React 19 framework (App Router & Webpack) | 100% Free |
+| **Language** | TypeScript 5.7 | Strict end-to-end type safety across client, server, and ODM | 100% Free |
+| **Styling** | Tailwind CSS v4 | Cutting-edge utility styling with green agrarian theme | 100% Free |
+| **UI Components** | Radix UI Primitives | Accessible modals, dropdowns, accordions, and dialogs | 100% Free |
+| **Animation** | Framer Motion 12 | Fluid voice wave pulses, spring physics, and micro-interactions | 100% Free |
+| **AI Vision Engine** | Groq AI (Llama 3.2 Vision / Qwen 3.8) | Lightning-fast multimodal crop disease pathology | 30 req/min Free |
+| **AI Agronomist Chat** | Groq AI (Llama 3.3 70B / GPT-OSS 120B) | Contextual bilingual farming advisory | 30 req/min Free |
+| **Speech-to-Text (STT)**| Groq Whisper + Web Speech API | Neural regional speech recognition in EN, HI, MR | 100% Free |
+| **Text-to-Speech (TTS)**| Browser Web Speech Synthesis | Zero-latency, client-side offline neural voice playback | 100% Free |
+| **Weather Engine** | Open-Meteo API | Hyper-local agricultural weather forecasts & alerts | 100% Free |
+| **Database** | MongoDB Atlas / Mongoose 9 | Scalable cloud document database | 512 MB Free |
+| **Authentication** | Firebase Auth 12 | Secure authentication with server-side Admin SDK verification | Spark Free |
+| **Image Storage** | Cloudinary CDN | High-speed diagnostic plant photo delivery | 25 GB Free |
+| **PDF Engine** | jsPDF 4.2 | Custom VFS font-embedded vector PDF document generation | 100% Free |
+| **Icons** | Lucide React | Modern, crisp stroke icons | 100% Free |
 
 ---
 
@@ -338,8 +348,8 @@ The platform persists structured entities in MongoDB through Mongoose:
 Ensure your system meets the following requirements:
 - **Node.js**: v20.0.0 or higher ([Download Node.js](https://nodejs.org/))
 - **NPM**: v10.0.0 or higher
-- **MongoDB**: MongoDB Atlas connection string (or local MongoDB v6+)
-- **OpenAI API Key**: Valid API key from [platform.openai.com](https://platform.openai.com)
+- **Groq AI Key (FREE)**: Free API key from [console.groq.com/keys](https://console.groq.com/keys) (30 req/min free tier)
+- **MongoDB Atlas (FREE)**: Free 512 MB M0 Cluster from [cloud.mongodb.com](https://cloud.mongodb.com/)
 
 ---
 
@@ -347,7 +357,7 @@ Ensure your system meets the following requirements:
 
 The repository includes an automated Windows batch launcher:
 
-1. Double-click **[`start.bat`](file:///c:/Users/shara/Downloads/AgriMind-AI-main/start.bat)** in the root folder.
+1. Double-click **`start.bat`** in the root folder.
 2. The launcher will automatically:
    - Check and display your Node.js version.
    - Generate `.env.local` from template if missing.
@@ -378,7 +388,7 @@ The repository includes an automated Windows batch launcher:
    # On macOS / Linux / PowerShell:
    cp .env.example .env.local
    ```
-   Open `.env.local` in your editor and enter your `OPENAI_API_KEY` and `MONGODB_URI`.
+   Open `.env.local` in your editor and enter your free `GROQ_API_KEY` and `MONGODB_URI`.
 
 4. **Seed Default Crops and Market Data (Optional):**
    ```bash
@@ -402,53 +412,54 @@ The repository includes an automated Windows batch launcher:
 
 ## ⚙️ Environment Configuration
 
-Create `.env.local` in the project root:
+Create `.env.local` in the project root (all services provide permanent free tiers):
 
 ```env
 # =============================================================================
-# AgriMind AI — Environment Configuration
+# AgriMind AI — Environment Configuration (.env.local)
 # =============================================================================
 
 # --- App Settings ---
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-# --- MongoDB Atlas Connection ---
-# Obtain from MongoDB Atlas -> Database -> Connect -> Drivers
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/agrimind?retryWrites=true&w=majority
+# --- 1. Groq AI (FREE — 30 req/min, Ultra-fast LPU) ---
+# Sign up: https://console.groq.com/keys
+GROQ_API_KEY=gsk_your_groq_api_key_here
+GROQ_CHAT_MODEL=llama-3.3-70b-versatile
+GROQ_VISION_MODEL=llama-3.2-11b-vision-preview
+GROQ_MAX_TOKENS=1500
 
-# --- OpenAI (Mandatory for Disease Diagnosis, Chat & TTS) ---
-OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-OPENAI_CHAT_MODEL=gpt-4o-mini
-OPENAI_VISION_MODEL=gpt-4o
-OPENAI_MAX_TOKENS=1500
-OPENAI_TTS_MODEL=tts-1
-OPENAI_TTS_VOICE=nova
+# --- 2. MongoDB Atlas (FREE M0 Cluster — 512 MB) ---
+# Obtain from: https://cloud.mongodb.com/
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/agrimind?retryWrites=true&w=majority
 
-# --- Firebase Client SDK (Authentication) ---
+# --- 3. Firebase Authentication (FREE — Spark Plan) ---
+# Console: https://console.firebase.google.com/
 NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSy...
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=agrimind.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=agrimind
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=agrimind.appspot.com
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=agrimind-xxxxx.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=agrimind-xxxxx
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=agrimind-xxxxx.firebasestorage.app
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=000000000000
-NEXT_PUBLIC_FIREBASE_APP_ID=1:000000000000:web:0000000000000000000000
+NEXT_PUBLIC_FIREBASE_APP_ID=1:000000000000:web:xxxxxxxxxxxx
 
-# --- Firebase Admin SDK (Server Auth Verification) ---
-FIREBASE_ADMIN_PROJECT_ID=agrimind
-FIREBASE_ADMIN_CLIENT_EMAIL=firebase-adminsdk-xxxxx@agrimind.iam.gserviceaccount.com
+# --- 4. Firebase Admin SDK (Server Auth Verification) ---
+FIREBASE_ADMIN_PROJECT_ID=agrimind-xxxxx
+FIREBASE_ADMIN_CLIENT_EMAIL=firebase-adminsdk-xxxxx@agrimind-xxxxx.iam.gserviceaccount.com
 FIREBASE_ADMIN_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
 
-# --- Cloudinary (Diagnostic Leaf Image Storage) ---
+# --- 5. Cloudinary Image Storage (FREE — 25 GB) ---
+# Obtain from: https://cloudinary.com/
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_key
 CLOUDINARY_API_SECRET=your_cloudinary_secret
 
-# --- Valsea AI (Optional: Regional Speech Transcription) ---
-VALSEA_API_KEY=vl_live_xxxxxxxx
-VALSEA_API_BASE_URL=https://api.valsea.ai
-VALSEA_MAX_REQUESTS_PER_MINUTE=18
-
-# --- Regional Officer WhatsApp Support ---
+# --- 6. Regional WhatsApp Officer Support (Optional) ---
 NEXT_PUBLIC_WHATSAPP_SUPPORT=919876543210
+
+# --- 7. Optional APIs ---
+# Open-Meteo weather is built-in and free (no API key required).
+GOOGLE_WEATHER_API_KEY=
+VALSEA_API_KEY=
 ```
 
 > [!NOTE]
