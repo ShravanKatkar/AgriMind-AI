@@ -12,6 +12,7 @@
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com)
 [![Firebase](https://img.shields.io/badge/Firebase-Auth-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ShravanKatkar/AgriMind-AI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 </div>
@@ -41,6 +42,7 @@
 - [Available Scripts](#-available-scripts)
 - [Project Directory Structure](#-project-directory-structure)
 - [Troubleshooting & FAQs](#-troubleshooting--faqs)
+- [Author & Maintainer](#-author--maintainer)
 - [License](#-license)
 
 ---
@@ -339,9 +341,10 @@ The repository includes an automated Windows batch launcher:
 
 ### Option B: Manual Installation
 
-1. **Clone or Extract the Codebase:**
+1. **Clone the Repository:**
    ```bash
-   cd AgriMind-AI-main
+   git clone https://github.com/ShravanKatkar/AgriMind-AI.git
+   cd AgriMind-AI
    ```
 
 2. **Install Node Dependencies:**
@@ -542,6 +545,14 @@ AgriMind-AI/
   VALSEA_API_KEY=vl_live_your_key_here
   ```
   If not supplied, the voice assistant will automatically fall back to the native browser Speech Recognition API.
+
+---
+
+## 👨‍💻 Author & Maintainer
+
+**Shravan Katkar**
+- GitHub: [@ShravanKatkar](https://github.com/ShravanKatkar)
+- Repository: [AgriMind-AI](https://github.com/ShravanKatkar/AgriMind-AI)
 
 ---
 
