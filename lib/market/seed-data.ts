@@ -1,0 +1,205 @@
+/** Indian wholesale market reference data (INR ₹) — updated via seed script */
+
+export interface MarketCropSeed {
+  name: string
+  nameSi: string // Holds Hindi & Marathi display labels
+  unit: string
+  price: number
+  previousPrice: number
+  location: string
+  market: string
+  demandLevel: "high" | "medium" | "low"
+  forecast: string
+  history: { label: string; price: number }[]
+}
+
+export const MARKET_LOCATIONS = [
+  { name: "Pune", demand: "Very High", crops: ["Tomato", "Onion", "Carrot", "Potato"] },
+  { name: "Nashik", demand: "Very High", crops: ["Onion", "Tomato", "Chili", "Banana"] },
+  { name: "Mumbai", demand: "High", crops: ["Rice", "Banana", "Coconut", "Tomato"] },
+  { name: "Nagpur", demand: "Medium", crops: ["Soybean", "Chili", "Onion", "Potato"] },
+  { name: "Delhi", demand: "Very High", crops: ["Rice", "Potato", "Onion", "Carrot"] },
+]
+
+export const MARKET_CROP_SEEDS: MarketCropSeed[] = [
+  {
+    name: "Tomato",
+    nameSi: "टमाटर • टोमॅटो",
+    unit: "kg",
+    price: 32,
+    previousPrice: 28,
+    location: "Nashik",
+    market: "Nashik APMC Mandi",
+    demandLevel: "high",
+    forecast: "Demand strong across Pune and Mumbai wholesale channels.",
+    history: [
+      { label: "Jan", price: 24 },
+      { label: "Feb", price: 26 },
+      { label: "Mar", price: 22 },
+      { label: "Apr", price: 28 },
+      { label: "May", price: 32 },
+    ],
+  },
+  {
+    name: "Rice",
+    nameSi: "चावल • तांदूळ",
+    unit: "kg",
+    price: 58,
+    previousPrice: 55,
+    location: "Karnal",
+    market: "Haryana APMC Mandi",
+    demandLevel: "medium",
+    forecast: "Steady festive and consumer demand across northern markets.",
+    history: [
+      { label: "Jan", price: 52 },
+      { label: "Feb", price: 54 },
+      { label: "Mar", price: 55 },
+      { label: "Apr", price: 55 },
+      { label: "May", price: 58 },
+    ],
+  },
+  {
+    name: "Onion",
+    nameSi: "प्याज • कांदा",
+    unit: "kg",
+    price: 26,
+    previousPrice: 22,
+    location: "Lasalgaon",
+    market: "Lasalgaon APMC (Asia's Largest)",
+    demandLevel: "high",
+    forecast: "Rabi harvest trading actively with strong interstate dispatches.",
+    history: [
+      { label: "Jan", price: 20 },
+      { label: "Feb", price: 18 },
+      { label: "Mar", price: 22 },
+      { label: "Apr", price: 22 },
+      { label: "May", price: 26 },
+    ],
+  },
+  {
+    name: "Chili",
+    nameSi: "हरी मिर्च • मिरची",
+    unit: "kg",
+    price: 75,
+    previousPrice: 80,
+    location: "Kolhapur",
+    market: "Kolhapur APMC Mandi",
+    demandLevel: "medium",
+    forecast: "Good southern arrivals; prices stabilizing after recent spike.",
+    history: [
+      { label: "Jan", price: 85 },
+      { label: "Feb", price: 82 },
+      { label: "Mar", price: 78 },
+      { label: "Apr", price: 80 },
+      { label: "May", price: 75 },
+    ],
+  },
+  {
+    name: "Carrot",
+    nameSi: "गाजर • गाजर",
+    unit: "kg",
+    price: 36,
+    previousPrice: 34,
+    location: "Pune",
+    market: "Pune Gultekdi APMC",
+    demandLevel: "medium",
+    forecast: "Steady restaurant and retail demand across Western Maharashtra.",
+    history: [
+      { label: "Jan", price: 30 },
+      { label: "Feb", price: 32 },
+      { label: "Mar", price: 34 },
+      { label: "Apr", price: 34 },
+      { label: "May", price: 36 },
+    ],
+  },
+  {
+    name: "Potato",
+    nameSi: "आलू • बटाटा",
+    unit: "kg",
+    price: 22,
+    previousPrice: 20,
+    location: "Agra",
+    market: "Agra / Pune Mandi",
+    demandLevel: "medium",
+    forecast: "Cold storage supplies keeping wholesale rates balanced.",
+    history: [
+      { label: "Jan", price: 18 },
+      { label: "Feb", price: 19 },
+      { label: "Mar", price: 20 },
+      { label: "Apr", price: 20 },
+      { label: "May", price: 22 },
+    ],
+  },
+  {
+    name: "Cabbage",
+    nameSi: "पत्तागोभी • कोबी",
+    unit: "kg",
+    price: 18,
+    previousPrice: 20,
+    location: "Manchar",
+    market: "Manchar / Pune APMC",
+    demandLevel: "low",
+    forecast: "Heavy local arrivals from farm belts softening wholesale rates.",
+    history: [
+      { label: "Jan", price: 24 },
+      { label: "Feb", price: 22 },
+      { label: "Mar", price: 20 },
+      { label: "Apr", price: 20 },
+      { label: "May", price: 18 },
+    ],
+  },
+  {
+    name: "Banana",
+    nameSi: "केला • केळी",
+    unit: "dozen",
+    price: 35,
+    previousPrice: 32,
+    location: "Jalgaon",
+    market: "Jalgaon Banana Mandi",
+    demandLevel: "high",
+    forecast: "North India transport dispatch active; premium grades in high demand.",
+    history: [
+      { label: "Jan", price: 28 },
+      { label: "Feb", price: 30 },
+      { label: "Mar", price: 30 },
+      { label: "Apr", price: 32 },
+      { label: "May", price: 35 },
+    ],
+  },
+  {
+    name: "Coconut",
+    nameSi: "नारियल • नारळ",
+    unit: "nut",
+    price: 28,
+    previousPrice: 25,
+    location: "Ratnagiri",
+    market: "Konkan APMC Market",
+    demandLevel: "medium",
+    forecast: "Coastal supplies steady; festive season lifting consumption.",
+    history: [
+      { label: "Jan", price: 22 },
+      { label: "Feb", price: 24 },
+      { label: "Mar", price: 25 },
+      { label: "Apr", price: 25 },
+      { label: "May", price: 28 },
+    ],
+  },
+  {
+    name: "Soybean",
+    nameSi: "सोयाबीन • सोयाबीन",
+    unit: "kg",
+    price: 48,
+    previousPrice: 46,
+    location: "Latur",
+    market: "Latur APMC Mandi",
+    demandLevel: "high",
+    forecast: "Crushers and domestic oil mills actively buying at current levels.",
+    history: [
+      { label: "Jan", price: 42 },
+      { label: "Feb", price: 44 },
+      { label: "Mar", price: 45 },
+      { label: "Apr", price: 46 },
+      { label: "May", price: 48 },
+    ],
+  },
+]
