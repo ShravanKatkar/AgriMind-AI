@@ -1,9 +1,18 @@
 <div align="center">
 
+<img src="public/agrimind-logo.png" alt="AgriMind AI Logo" width="140" style="border-radius: 24px; margin-bottom: 12px;" />
+
 # 🌾 AgriMind AI
 ### Comprehensive Multilingual Smart Agriculture & Crop Pathology Platform
 
-*Empowering farmers with AI-driven visual disease diagnosis, natural bidirectional voice assistance, market price intelligence, and precision farm management.*
+*Empowering farmers with AI-driven visual disease diagnosis, bidirectional voice assistance in regional Indian languages, live mandi price intelligence, and precision farm management.*
+
+<p align="center">
+  <a href="https://github.com/ShravanKatkar/AgriMind-AI/stargazers"><img src="https://img.shields.io/github/stars/ShravanKatkar/AgriMind-AI?style=for-the-badge&logo=github&color=gold" alt="Stars"></a>
+  <a href="https://github.com/ShravanKatkar/AgriMind-AI/network/members"><img src="https://img.shields.io/github/forks/ShravanKatkar/AgriMind-AI?style=for-the-badge&logo=github&color=blue" alt="Forks"></a>
+  <a href="https://github.com/ShravanKatkar/AgriMind-AI/issues"><img src="https://img.shields.io/github/issues/ShravanKatkar/AgriMind-AI?style=for-the-badge&logo=github&color=red" alt="Issues"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License"></a>
+</p>
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.2.6-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
@@ -12,8 +21,15 @@
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com)
 [![Firebase](https://img.shields.io/badge/Firebase-Auth-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ShravanKatkar/AgriMind-AI)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+
+<p align="center">
+  <a href="#-overview"><b>📖 Overview</b></a> •
+  <a href="#-core-features--modules"><b>✨ Features</b></a> •
+  <a href="#-supported-languages"><b>🌐 Languages</b></a> •
+  <a href="#-system-architecture"><b>🏛️ Architecture</b></a> •
+  <a href="#-getting-started"><b>⚡ Getting Started</b></a> •
+  <a href="#-api-reference"><b>🔌 API Reference</b></a>
+</p>
 
 </div>
 
@@ -42,6 +58,8 @@
 - [Available Scripts](#-available-scripts)
 - [Project Directory Structure](#-project-directory-structure)
 - [Troubleshooting & FAQs](#-troubleshooting--faqs)
+- [Deployment Guide](#-deployment-guide)
+- [Contributing](#-contributing)
 - [Author & Maintainer](#-author--maintainer)
 - [License](#-license)
 
@@ -545,6 +563,60 @@ AgriMind-AI/
   VALSEA_API_KEY=vl_live_your_key_here
   ```
   If not supplied, the voice assistant will automatically fall back to the native browser Speech Recognition API.
+
+---
+
+## 🚀 Deployment Guide
+
+### Deploying to Vercel (Recommended)
+
+The easiest and fastest way to deploy AgriMind AI is with [Vercel](https://vercel.com):
+
+1. Push your code to GitHub: `https://github.com/ShravanKatkar/AgriMind-AI`
+2. Go to the [Vercel Dashboard](https://vercel.com/new) and click **"Add New Project"**.
+3. Import your **AgriMind-AI** repository.
+4. In **Environment Variables**, supply your keys:
+   - `MONGODB_URI`
+   - `OPENAI_API_KEY`
+   - `NEXT_PUBLIC_APP_URL` (set to your custom domain or vercel.app URL)
+   - `CLOUDINARY_*` or Firebase credentials
+5. Click **Deploy**. Vercel will build and serve the application globally.
+
+### Deploying with Node.js & PM2 on Linux VPS
+
+```bash
+# 1. Clone repository
+git clone https://github.com/ShravanKatkar/AgriMind-AI.git
+cd AgriMind-AI
+
+# 2. Install dependencies
+npm ci
+
+# 3. Create production environment config
+cp .env.example .env.local
+nano .env.local
+
+# 4. Build application
+npm run build
+
+# 5. Run using PM2 process manager
+npm install -g pm2
+pm2 start npm --name "agrimind-ai" -- start
+pm2 save
+pm2 startup
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions make the open-source community an incredible place to learn, inspire, and create! Any contributions to **AgriMind AI** are **greatly appreciated**.
+
+1. **Fork the Project** ([https://github.com/ShravanKatkar/AgriMind-AI/fork](https://github.com/ShravanKatkar/AgriMind-AI/fork))
+2. **Create your Feature Branch** (`git checkout -b feature/AmazingFeature`)
+3. **Commit your Changes** (`git commit -m 'feat: add some AmazingFeature'`)
+4. **Push to the Branch** (`git push origin feature/AmazingFeature`)
+5. **Open a Pull Request**
 
 ---
 
