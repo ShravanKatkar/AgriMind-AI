@@ -17,20 +17,34 @@ export async function POST(request: Request) {
 
     const decoded = await getAdminAuth().verifyIdToken(idToken)
 
-    const user = await upsertUserFromAuth({
-      firebaseUid: decoded.uid,
-      email: decoded.email ?? "",
-      displayName: decoded.name ?? decoded.email?.split("@")[0] ?? "Farmer",
-      photoURL: decoded.picture,
-    })
+    let userRole = "farmer"
+    let userDisplayName = decoded.name ?? decoded.email?.split("@")[0] ?? "Farmer"
+    const userEmail = decoded.email ?? ""
 
-    if (user.role === "admin") {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Admin accounts must sign in through the admin portal.",
-        },
-        { status: 403 }
+    try {
+      const user = await upsertUserFromAuth({
+        firebaseUid: decoded.uid,
+        email: userEmail,
+        displayName: userDisplayName,
+        photoURL: decoded.picture,
+      })
+
+      if (user.role === "admin") {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Admin accounts must sign in through the admin portal.",
+          },
+          { status: 403 }
+        )
+      }
+
+      userRole = user.role
+      userDisplayName = user.displayName ?? userDisplayName
+    } catch (dbErr) {
+      console.warn(
+        "[auth/session] MongoDB unreachable during session upsert, continuing with Firebase claims:",
+        (dbErr as Error).message
       )
     }
 
@@ -42,10 +56,10 @@ export async function POST(request: Request) {
     const response = NextResponse.json({
       success: true,
       data: {
-        uid: user.firebaseUid,
-        email: user.email,
-        displayName: user.displayName,
-        role: user.role,
+        uid: decoded.uid,
+        email: userEmail,
+        displayName: userDisplayName,
+        role: userRole,
       },
     })
 

@@ -42,8 +42,12 @@ export async function upsertUserFromAuth(
 export async function getUserByFirebaseUid(
   firebaseUid: string
 ): Promise<IUser | null> {
-  await connectDB()
-  return User.findOne({ firebaseUid })
+  try {
+    await connectDB()
+    return await User.findOne({ firebaseUid })
+  } catch {
+    return null
+  }
 }
 
 export async function isAdminUser(firebaseUid: string): Promise<boolean> {

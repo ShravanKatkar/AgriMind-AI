@@ -54,9 +54,37 @@ export async function seedMarketDataIfEmpty(): Promise<void> {
 }
 
 export async function getMarketPrices(): Promise<IMarketCrop[]> {
-  await connectDB()
-  await seedMarketDataIfEmpty()
-  return MarketCrop.find().sort({ name: 1 }).lean()
+  try {
+    await connectDB()
+    await seedMarketDataIfEmpty()
+    const crops = await MarketCrop.find().sort({ name: 1 }).lean()
+    if (crops.length > 0) return crops as IMarketCrop[]
+  } catch (err) {
+    console.warn("[market.service] DB unavailable, showing seed market prices:", (err as Error).message)
+  }
+
+  return MARKET_CROP_SEEDS.map((s, idx) => {
+    const change = s.price - s.previousPrice
+    const changePercent =
+      s.previousPrice === 0 ? 0 : Math.round((change / s.previousPrice) * 1000) / 10
+    return {
+      _id: `sample-market-${idx}` as unknown,
+      name: s.name,
+      nameSi: s.nameSi,
+      unit: s.unit,
+      price: s.price,
+      previousPrice: s.previousPrice,
+      change,
+      changePercent,
+      trend: computeTrend(changePercent),
+      demandLevel: s.demandLevel,
+      location: s.location,
+      market: s.market,
+      forecast: s.forecast,
+      history: s.history,
+      lastUpdated: new Date(),
+    } as unknown as IMarketCrop
+  })
 }
 
 export function isMarketDataStale(lastUpdated?: Date | null): boolean {

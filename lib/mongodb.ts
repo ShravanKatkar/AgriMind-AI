@@ -26,9 +26,16 @@ if (!global.mongooseCache) {
 
 const connectOptions = {
   bufferCommands: false,
-  serverSelectionTimeoutMS: 20000,
+  serverSelectionTimeoutMS: 4000,
   lookup: atlasDnsLookup,
 } as mongoose.ConnectOptions
+
+let lastFailureTime = 0
+const FAILURE_COOLDOWN_MS = 15000
+
+export function isMongoConnected(): boolean {
+  return mongoose.connection.readyState === 1
+}
 
 export async function connectDB(): Promise<typeof mongoose> {
   const envUri = getMongoConnectionUri()
@@ -36,21 +43,45 @@ export async function connectDB(): Promise<typeof mongoose> {
   if (cached.envUri && cached.envUri !== envUri) {
     cached.conn = null
     cached.promise = null
+    lastFailureTime = 0
     await mongoose.disconnect().catch(() => {})
   }
 
-  if (cached.conn) {
+  if (cached.conn && mongoose.connection.readyState === 1) {
     return cached.conn
+  }
+
+  // If a recent connection attempt failed, fail fast during cooldown to prevent request hangs
+  if (Date.now() - lastFailureTime < FAILURE_COOLDOWN_MS) {
+    throw new Error(
+      "MongoDB connection temporarily unavailable (cooling down after recent failure)"
+    )
   }
 
   if (!cached.promise) {
     cached.envUri = envUri
     cached.promise = (async () => {
-      const resolved = await resolveMongoUri(envUri)
-      return mongoose.connect(resolved, connectOptions)
+      try {
+        const resolved = await resolveMongoUri(envUri)
+        const conn = await mongoose.connect(resolved, connectOptions)
+        lastFailureTime = 0
+        return conn
+      } catch (err) {
+        lastFailureTime = Date.now()
+        cached.promise = null
+        cached.conn = null
+        throw err
+      }
     })()
   }
 
-  cached.conn = await cached.promise
-  return cached.conn
+  try {
+    cached.conn = await cached.promise
+    return cached.conn
+  } catch (err) {
+    cached.promise = null
+    cached.conn = null
+    throw err
+  }
 }
+

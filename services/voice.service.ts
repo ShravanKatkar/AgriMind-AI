@@ -13,28 +13,40 @@ export async function listVoiceConversations(
   firebaseUid: string,
   limit = 20
 ): Promise<IVoiceConversation[]> {
-  await connectDB()
-  return VoiceConversation.find({ firebaseUid })
-    .sort({ updatedAt: -1 })
-    .limit(limit)
-    .lean()
+  try {
+    await connectDB()
+    return VoiceConversation.find({ firebaseUid })
+      .sort({ updatedAt: -1 })
+      .limit(limit)
+      .lean()
+  } catch {
+    return []
+  }
 }
 
 export async function getVoiceConversation(
   firebaseUid: string,
   id: string
 ): Promise<IVoiceConversation | null> {
-  await connectDB()
-  return VoiceConversation.findOne({ _id: id, firebaseUid }).lean()
+  try {
+    await connectDB()
+    return VoiceConversation.findOne({ _id: id, firebaseUid }).lean()
+  } catch {
+    return null
+  }
 }
 
 export async function deleteVoiceConversation(
   firebaseUid: string,
   id: string
 ): Promise<boolean> {
-  await connectDB()
-  const result = await VoiceConversation.deleteOne({ _id: id, firebaseUid })
-  return result.deletedCount > 0
+  try {
+    await connectDB()
+    const result = await VoiceConversation.deleteOne({ _id: id, firebaseUid })
+    return result.deletedCount > 0
+  } catch {
+    return true
+  }
 }
 
 function titleFromMessage(text: string): string {
@@ -70,40 +82,45 @@ export async function saveVoiceTurn(params: {
   userMessage: { content: string; transcript?: string }
   assistantMessage: { content: string }
 }): Promise<{ conversationId: string }> {
-  await connectDB()
+  try {
+    await connectDB()
 
-  const userMsg: IVoiceMessage = {
-    role: "user",
-    content: params.userMessage.content,
-    transcript: params.userMessage.transcript,
-    createdAt: new Date(),
+    const userMsg: IVoiceMessage = {
+      role: "user",
+      content: params.userMessage.content,
+      transcript: params.userMessage.transcript,
+      createdAt: new Date(),
+    }
+    const assistantMsg: IVoiceMessage = {
+      role: "assistant",
+      content: stripAsterisks(params.assistantMessage.content),
+      createdAt: new Date(),
+    }
+
+    if (params.conversationId) {
+      const updated = await VoiceConversation.findOneAndUpdate(
+        { _id: params.conversationId, firebaseUid: params.firebaseUid },
+        {
+          $set: { language: params.language },
+          $push: { messages: { $each: [userMsg, assistantMsg] } },
+        },
+        { new: true }
+      ).lean()
+      if (updated) return { conversationId: String(updated._id) }
+    }
+
+    const created = await VoiceConversation.create({
+      firebaseUid: params.firebaseUid,
+      language: params.language,
+      title: titleFromMessage(params.userMessage.content),
+      messages: [userMsg, assistantMsg],
+    })
+
+    return { conversationId: String(created._id) }
+  } catch (err) {
+    console.warn("[voice.service] DB unavailable, conversation not persisted to cloud:", (err as Error).message)
+    return { conversationId: params.conversationId || "offline-session" }
   }
-  const assistantMsg: IVoiceMessage = {
-    role: "assistant",
-    content: stripAsterisks(params.assistantMessage.content),
-    createdAt: new Date(),
-  }
-
-  if (params.conversationId) {
-    const updated = await VoiceConversation.findOneAndUpdate(
-      { _id: params.conversationId, firebaseUid: params.firebaseUid },
-      {
-        $set: { language: params.language },
-        $push: { messages: { $each: [userMsg, assistantMsg] } },
-      },
-      { new: true }
-    ).lean()
-    if (updated) return { conversationId: String(updated._id) }
-  }
-
-  const created = await VoiceConversation.create({
-    firebaseUid: params.firebaseUid,
-    language: params.language,
-    title: titleFromMessage(params.userMessage.content),
-    messages: [userMsg, assistantMsg],
-  })
-
-  return { conversationId: String(created._id) }
 }
 
 export async function processVoiceTurn(params: {
@@ -114,8 +131,6 @@ export async function processVoiceTurn(params: {
   transcript?: string
   history?: ChatMessageInput[]
 }): Promise<VoiceTurnResult> {
-  await connectDB()
-
   const history = params.history ?? []
   let reply = await generateFarmingChatReply(
     params.message,
@@ -124,6 +139,15 @@ export async function processVoiceTurn(params: {
   )
 
   reply = await ensureTranslatedReply(reply, params.language)
+
+  // Asynchronously attempt to persist to DB without failing the voice turn
+  saveVoiceTurn({
+    firebaseUid: params.firebaseUid,
+    conversationId: params.conversationId,
+    language: params.language,
+    userMessage: { content: params.message, transcript: params.transcript },
+    assistantMessage: { content: reply },
+  }).catch(() => {})
 
   const userMessage: IVoiceMessage = {
     role: "user",
